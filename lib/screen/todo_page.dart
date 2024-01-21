@@ -23,20 +23,39 @@ class _ToDoPageState extends State<ToDoPage> {
               const SizedBox(height: 20),
               Column(
                 children: [
-                  Container(
-                    padding: const EdgeInsets.all(20),
-                    width: 300,
-                    height: 80,
-                    color: Colors.grey.shade200,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text("ToDo"),
-                        IconButton(
-                          onPressed: () {},
-                          icon: const Icon(Icons.check),
-                        ),
-                      ],
+                  SizedBox(
+                    height: 450,
+                    width: 500,
+                    child: ListView.builder(
+                      itemCount: todos.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Column(
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(20),
+                              width: 300,
+                              height: 80,
+                              color: Colors.grey.shade200,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(todos[index]),
+                                  IconButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        todos.removeAt(index);
+                                      });
+                                    },
+                                    icon: const Icon(Icons.check),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(height: 10),
+                          ],
+                        );
+                      },
                     ),
                   ),
                 ],
@@ -57,9 +76,10 @@ class _ToDoPageState extends State<ToDoPage> {
                   IconButton(
                     onPressed: () {
                       if (todo.text.isNotEmpty) {
-                        todos.add(todo.text);
-                        todo.clear();
-                        print(todos);
+                        setState(() {
+                          todos.add(todo.text);
+                          todo.clear();
+                        });
                       }
                     },
                     icon: const Icon(Icons.add),
