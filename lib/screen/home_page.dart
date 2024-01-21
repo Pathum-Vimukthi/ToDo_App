@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sample_app/screen/todo_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -47,7 +48,30 @@ class HomePage extends StatelessWidget {
                 height: 50,
                 child: ElevatedButton(
                   onPressed: () {
-                    if (email.text == 'admin' && password.text == 'admin') {}
+                    if (email.text == 'admin' && password.text == 'admin') {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const ToDoPage(),
+                        ),
+                      );
+                    } else {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) => AlertDialog(
+                          title: const Text('Error'),
+                          content: const Text('Email or Password is incorrect'),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: const Text('OK'),
+                            ),
+                          ],
+                        ),
+                      );
+                    }
                   },
                   child: const Text(
                     "Login",

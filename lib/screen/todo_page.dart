@@ -10,8 +10,11 @@ class ToDoPage extends StatefulWidget {
 class _ToDoPageState extends State<ToDoPage> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.deepPurple,
+      ),
+      body: const Center(
         child: Text('ToDo Page'),
       ),
     );
